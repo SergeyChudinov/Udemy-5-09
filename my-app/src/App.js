@@ -1,6 +1,9 @@
 import {Component, Fragment} from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import BootstrapTest from './BootstrapTest'
 
+import {Carousel} from 'react-bootstrap';
 import './App.css';
 
 const EmpItem = styled.div`
@@ -74,13 +77,76 @@ class WhoAmI extends Component {
 }
 const Wrapper = styled.div`
   width: 600px;
-  margin: 80px auto 0 auto;
+  margin: 80px auto 0 auto; 
 `;
+
+const DynamicGreating = (props) => {
+  return (
+    <div className={'mb-3 p-3 border border-' + props.color}>
+      {
+        React.Children.map(props.children, child => {
+          return React.cloneElement(child, {className: 'shadow p-3 m-3 border rounded'})
+        })
+      }
+    </div> 
+  )
+}
 
 function App() {
   return (
     <Wrapper>
-      {/* <WhoAmI name='John' surname='Smith' link='facebook.com'/> */}
+
+      <BootstrapTest
+        left = {
+          <DynamicGreating color={'primary'}>
+            <h2>This weel was hard</h2>
+            <h2>Hello world</h2>
+          </DynamicGreating>
+        }
+        right = {
+          <Carousel>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src="https://picsum.photos/200/300?random=1"
+                    alt="First slide"
+                />
+                <Carousel.Caption>
+                    <h3>First slide label</h3>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src="https://picsum.photos/200/300?random=2"
+                    alt="Second slide"
+                />
+
+                <Carousel.Caption>
+                    <h3>Second slide label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                className="d-block w-100"
+                src="https://picsum.photos/200/300?random=3"
+                alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                <h3>Third slide label</h3>
+                <p>
+                    Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                </p>
+                </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+        }
+      />
+
+      {/* <WhoAmI name={() => {return 'John'}} surname='Smith' link='facebook.com'/> */}
       {/* <WhoAmI name={{firstName: 'Alex'}} surname='Shepard' link='vk.com'/> */}
       <WhoAmI name='John' surname='Smith' link='facebook.com'/>
       <WhoAmI name='Alex' surname='Shepard' link='facebook.com'/>
