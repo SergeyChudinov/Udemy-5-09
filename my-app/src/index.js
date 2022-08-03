@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Button} from './App';
 
-import BootstrapTest from './BootstrapTest'
+
 
 import styled from 'styled-components';
 
@@ -24,7 +24,6 @@ root.render(
     <App />
     <Button/>
     <BigButton as='a'>Отправить отчет</BigButton>
-    <BootstrapTest/>
   </React.StrictMode>
 );
 
