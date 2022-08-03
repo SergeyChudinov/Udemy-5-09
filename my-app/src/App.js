@@ -91,11 +91,19 @@ const DynamicGreating = (props) => {
     </div> 
   )
 }
-
+const HelloGreatings = () => {
+  return (
+    <div style={{width: '600px', margin: '0 auto'}}>
+      <DynamicGreating color={'primary'}>
+        <h2>Hello world</h2>
+      </DynamicGreating>
+    </div>
+  )
+}
 function App() {
   return (
     <Wrapper>
-
+      <HelloGreatings/>
       <BootstrapTest
         left = {
           <DynamicGreating color={'primary'}>
@@ -107,6 +115,7 @@ function App() {
           <Carousel>
             <Carousel.Item>
                 <img
+                    style={{hight: '266px'}}
                     className="d-block w-100"
                     src="https://picsum.photos/200/300?random=1"
                     alt="First slide"
@@ -118,6 +127,7 @@ function App() {
             </Carousel.Item>
             <Carousel.Item>
                 <img
+                    style={{hight: '266px'}}
                     className="d-block w-100"
                     src="https://picsum.photos/200/300?random=2"
                     alt="Second slide"
@@ -130,6 +140,7 @@ function App() {
             </Carousel.Item>
             <Carousel.Item>
                 <img
+                    style={{hight: '266px'}}
                 className="d-block w-100"
                 src="https://picsum.photos/200/300?random=3"
                 alt="Third slide"
