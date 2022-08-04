@@ -1,5 +1,6 @@
 import {Component, Fragment} from 'react';
 import React from 'react';
+import ReactDOM  from 'react-dom';
 import styled from 'styled-components';
 import BootstrapTest from './BootstrapTest'
 
@@ -159,7 +160,9 @@ class Form extends Component {
   render() {
       return (
           <Container>
-            <form className="w-50 border mt-5 p-3 m-auto">
+            <form className="w-50 border mt-5 p-3 m-auto"
+              style={{'overflow': 'hidden', 
+              'position': 'relative'}}>
               <div className="mb-3">
                   <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
                   <input ref={this.myRef} onInput={this.onInput} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
@@ -170,10 +173,32 @@ class Form extends Component {
                   <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
                   <textarea onClick={this.focusFirstTI} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
+              <Portal>
+                  <Msg/>
+              </Portal>
             </form>
           </Container>
       )
   }
+}
+const Portal = (props) => {
+  const node = document.createElement('div');
+  document.body.appendChild(node);
+  return ReactDOM.createPortal(props.children, node);
+}
+
+const Msg = () => {
+  return (
+    <div 
+      style={{'width': '500px', 
+        'height': '50px', 
+        'backgroundColor': 'red', 
+        'position': 'absolute', 
+        'right': '0', 
+        'bottom': '200px'}}>
+    Hello
+  </div>
+  )
 }
 class TextInput extends Component {
   doSmth = () => {
