@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BootstrapTest from './BootstrapTest'
 
-import {Carousel} from 'react-bootstrap';
+import {Carousel, Container} from 'react-bootstrap';
 import './App.css';
 
 const EmpItem = styled.div`
@@ -129,71 +129,129 @@ class Counter extends Component {
     )
   }
 }
+class Form extends Component {
+  constructor(props) {
+      super(props);
+      this.myRef = React.createRef();
+      this.state = {
+        input: ''
+      }
+  }
+  // setInputRef = (elem) => {
+  //   this.myRef = elem;
+  // }
+  componentDidMount() {
+    this.myRef.current.focus();
+  }
+  focusFirstTI = () => {
+    if (!this.state.input) {
+      this.myRef.current.focus();
+    }
+    // if (this.myRef) {
+    //   this.myRef.focus();
+    // }
+  }
+  onInput = (event) => {
+    this.setState({
+      input: event.target.value
+    })
+  }
+  render() {
+      return (
+          <Container>
+            <form className="w-50 border mt-5 p-3 m-auto">
+              <div className="mb-3">
+                  <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+                  <input ref={this.myRef} onInput={this.onInput} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                  {/* <input ref={this.setInputRef} onInput={this.onInput} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/> */}
+                  {/* <TextInput ref={this.myRef}/> */}
+              </div>
+              <div className="mb-3">
+                  <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+                  <textarea onClick={this.focusFirstTI} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </form>
+          </Container>
+      )
+  }
+}
+class TextInput extends Component {
+  doSmth = () => {
+    console.log('smth');
+  }
+  render() {
+    return (
+      <input ref={this.myRef} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+    )
+  }
+}
 function App() {
   return (
-    <Wrapper>
-      <Counter render={counter => (
-        <Message counter={counter}/>
-      )}/>
-      <HelloGreatings/>
-      <BootstrapTest
-        left = {
-          <DynamicGreating color={'primary'}>
-            <h2>This weel was hard</h2>
-            <h2>Hello world</h2>
-          </DynamicGreating>
-        }
-        right = {
-          <Carousel>
-            <Carousel.Item>
-                <img
-                    style={{hight: '266px'}}
-                    className="d-block w-100"
-                    src="https://picsum.photos/200/300?random=1"
-                    alt="First slide"
-                />
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    style={{hight: '266px'}}
-                    className="d-block w-100"
-                    src="https://picsum.photos/200/300?random=2"
-                    alt="Second slide"
-                />
+    <>
+      <Form/>
+      <Wrapper>
+        <Counter render={counter => (
+          <Message counter={counter}/>
+        )}/>
+        <HelloGreatings/>
+        <BootstrapTest
+          left = {
+            <DynamicGreating color={'primary'}>
+              <h2>This weel was hard</h2>
+              <h2>Hello world</h2>
+            </DynamicGreating>
+          }
+          right = {
+            <Carousel>
+              <Carousel.Item>
+                  <img
+                      style={{hight: '266px'}}
+                      className="d-block w-100"
+                      src="https://picsum.photos/200/300?random=1"
+                      alt="First slide"
+                  />
+                  <Carousel.Caption>
+                      <h3>First slide label</h3>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                  <img
+                      style={{hight: '266px'}}
+                      className="d-block w-100"
+                      src="https://picsum.photos/200/300?random=2"
+                      alt="Second slide"
+                  />
 
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    style={{hight: '266px'}}
-                className="d-block w-100"
-                src="https://picsum.photos/200/300?random=3"
-                alt="Third slide"
-                />
+                  <Carousel.Caption>
+                      <h3>Second slide label</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                  <img
+                      style={{hight: '266px'}}
+                  className="d-block w-100"
+                  src="https://picsum.photos/200/300?random=3"
+                  alt="Third slide"
+                  />
 
-                <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                    Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                </p>
-                </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-        }
-      />
-
-      {/* <WhoAmI name={() => {return 'John'}} surname='Smith' link='facebook.com'/> */}
-      {/* <WhoAmI name={{firstName: 'Alex'}} surname='Shepard' link='vk.com'/> */}
-      <WhoAmI name='John' surname='Smith' link='facebook.com'/>
-      <WhoAmI name='Alex' surname='Shepard' link='facebook.com'/>
-    </Wrapper>
+                  <Carousel.Caption>
+                  <h3>Third slide label</h3>
+                  <p>
+                      Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                  </p>
+                  </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          }
+        />
+        {/* <WhoAmI name={() => {return 'John'}} surname='Smith' link='facebook.com'/> */}
+        {/* <WhoAmI name={{firstName: 'Alex'}} surname='Shepard' link='vk.com'/> */}
+        <WhoAmI name='John' surname='Smith' link='facebook.com'/>
+        <WhoAmI name='Alex' surname='Shepard' link='facebook.com'/>
+      </Wrapper>
+    </>
   );
 }
 
